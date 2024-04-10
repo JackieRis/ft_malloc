@@ -6,7 +6,7 @@
 /*   By: tnguyen- <tnguyen-@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/27 14:59:19 by tnguyen-          #+#    #+#             */
-/*   Updated: 2024/04/10 02:55:09 by tnguyen-         ###   ########.fr       */
+/*   Updated: 2024/04/10 03:44:52 by tnguyen-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,9 +52,11 @@ int main(int argc, char **argv)
 	/*///////////////////////////////////////////////*/
 
 	char	*addr = ft_malloc(50);
+	char	*addr2 = ft_malloc(42);
 	show_alloc_mem();
 	strcpy(addr, "Bonjour\n");
 	printf("%s", addr);
 	ft_free(addr);
+	ft_free(addr2);
 	return 0;
 }

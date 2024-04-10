@@ -6,7 +6,7 @@
 /*   By: tnguyen- <tnguyen-@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/04 10:09:34 by tnguyen-          #+#    #+#             */
-/*   Updated: 2024/04/10 02:37:08 by tnguyen-         ###   ########.fr       */
+/*   Updated: 2024/04/10 03:21:53 by tnguyen-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,8 @@ typedef struct	s_page
 	void		*addr;
 	size_t		size;
 	size_t		used;
+	//pointer to stock blocks_used_size
+	size_t 		*blocks;
 }				t_page;
 
 void	*ft_malloc(size_t size);
