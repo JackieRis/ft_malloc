@@ -6,27 +6,32 @@
 #    By: tnguyen- <tnguyen-@student.42lyon.fr>      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/10/19 06:44:27 by tnguyen-          #+#    #+#              #
-#    Updated: 2024/04/09 17:52:19 by tnguyen-         ###   ########.fr        #
+#    Updated: 2024/04/11 01:59:28 by tnguyen-         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME	= malloc
 
-SRCS	= main.c ft_malloc.c free.c
+SRCS	= main.c ft_malloc.c free.c page.c utils.c
+
+LIBFT = libft/libft.a
 
 OBJ	= ${SRCS:.c=.o}
 
 CC = gcc
 
-FLAGS = -Wall -Werror -Wextra -pthread -fsanitize=address -fno-builtin -I.
+FLAGS = -Wall -Werror -Wextra -pthread -fno-builtin -I.
 
 all: ${NAME}
+
+${LIBFT}:
+	make -C libft
 
 %.o:%.c ft_malloc.h
 	${CC} ${FLAGS} -c $< -o ${<:.c=.o}
 
-${NAME}:    ${OBJ}
-	$(CC) ${FLAGS} $(OBJ) -o $(NAME)
+${NAME}:    ${OBJ} ${LIBFT}
+	$(CC) ${FLAGS} $(OBJ) ${LIBFT} -o $(NAME)
 
 clean:
 	rm -f ${OBJ}
