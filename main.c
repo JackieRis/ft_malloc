@@ -6,15 +6,11 @@
 /*   By: tnguyen- <tnguyen-@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/27 14:59:19 by tnguyen-          #+#    #+#             */
-/*   Updated: 2024/04/11 03:31:50 by tnguyen-         ###   ########.fr       */
+/*   Updated: 2024/04/11 03:55:41 by tnguyen-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <unistd.h>
-#include <stdlib.h>
-#include <string.h>
-#include <stdio.h>
-#include <fcntl.h>
 #include "ft_malloc.h"
 
 int main(int argc, char **argv)
@@ -75,8 +71,10 @@ int main(int argc, char **argv)
 	char *addr2 = ft_malloc(42 * sizeof(char));
 	int *addr3 = ft_malloc(100 * sizeof(int));
 	show_alloc_mem();
-	free_page(addr);
-	free_page(addr2);
-	free_page(addr3);
+	printf("\n");
+	free(addr2);
+	free(addr);
+	show_alloc_mem();
+	free(addr3);
 	return 0;
 }

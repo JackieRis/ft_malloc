@@ -6,7 +6,7 @@
 /*   By: tnguyen- <tnguyen-@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/10 19:39:13 by tnguyen-          #+#    #+#             */
-/*   Updated: 2024/04/11 03:31:34 by tnguyen-         ###   ########.fr       */
+/*   Updated: 2024/04/11 03:41:57 by tnguyen-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,11 @@
 #include "ft_malloc.h"
 
 static	t_page	*page;
+
+void	*get_page()
+{
+	return (page);
+}
 
 t_page	*create_page(int type)
 {
