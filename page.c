@@ -6,7 +6,7 @@
 /*   By: tnguyen- <tnguyen-@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/10 19:39:13 by tnguyen-          #+#    #+#             */
-/*   Updated: 2024/04/11 03:12:09 by tnguyen-         ###   ########.fr       */
+/*   Updated: 2024/04/11 03:31:34 by tnguyen-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,21 @@ t_page	*create_page(int type)
 	return (new);
 }
 
-void	show_mem()
+void	*find_page(int type)
+{
+	t_page	*it;
+
+	it = page;
+	while(it)
+	{
+		if (it->type == type && it->used < 100)
+			return (it);
+		it = it->next;
+	}
+	return (NULL);
+}
+
+void	show_alloc_mem()
 {
 	t_page	*it;
 
@@ -59,11 +73,19 @@ void	show_mem()
 		while(it)
 		{
 			if (it->type == TINY)
-				printf("TINY: %p\n", it);
+			{
+				printf("TINY : %p\n", it->addr);
+				for (int i = 0; i < (int)it->used; i++)
+					printf("%p - %p %lu\n", it->addr + (i * TINY), it->addr + (i * TINY) + it->blocks[i], it->blocks[i]);
+			}
 			else if (it->type == SMALL)
-				printf("SMALL: %p\n", it);
+			{
+				printf("SMALL : %p\n", it->addr);
+				for (int i = 0; i < (int)it->used; i++)
+					printf("%p - %p %lu\n", it->addr + (i * SMALL), it->addr + (i * SMALL) + it->blocks[i], it->blocks[i]);
+			}
 			else
-				printf("LARGE: %p\n", it);
+				printf("LARGE : %p\n", it->addr);
 			it = it->next;
 		}
 	}

@@ -6,7 +6,7 @@
 /*   By: tnguyen- <tnguyen-@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/04 10:09:34 by tnguyen-          #+#    #+#             */
-/*   Updated: 2024/04/11 01:55:47 by tnguyen-         ###   ########.fr       */
+/*   Updated: 2024/04/11 03:31:44 by tnguyen-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,9 @@ typedef struct	s_page
 
 void	move_mem(void** ref);
 t_page	*create_page(int type);
-void	show_mem();
+void	show_alloc_mem();
 void	free_page(void *addr);
+void	*find_page(int type);
+void	*ft_malloc(size_t size);
 
 #endif

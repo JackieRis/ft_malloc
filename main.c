@@ -6,7 +6,7 @@
 /*   By: tnguyen- <tnguyen-@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/27 14:59:19 by tnguyen-          #+#    #+#             */
-/*   Updated: 2024/04/11 03:12:19 by tnguyen-         ###   ########.fr       */
+/*   Updated: 2024/04/11 03:31:50 by tnguyen-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,14 +61,22 @@ int main(int argc, char **argv)
 
 	///*///////////////////////////////////////////////*/
 
-	t_page	*page = create_page(TINY);
-	t_page	*baguette = create_page(SMALL);
-	t_page	*poulet = create_page(SMALL);
+	//t_page	*page = create_page(TINY);
+	//t_page	*baguette = create_page(SMALL);
+	//t_page	*poulet = create_page(SMALL);
 	//show_mem();
-	show_mem();
-	free_page(page);
-	//(void)page;
-	free_page(baguette);
-	free_page(poulet);
+	//free_page(page);
+	//free_page(baguette);
+	//free_page(poulet);
+
+	///*///////////////////////////////////////////////*/
+
+	char *addr = ft_malloc(50 * sizeof(char));
+	char *addr2 = ft_malloc(42 * sizeof(char));
+	int *addr3 = ft_malloc(100 * sizeof(int));
+	show_alloc_mem();
+	free_page(addr);
+	free_page(addr2);
+	free_page(addr3);
 	return 0;
 }
