@@ -6,7 +6,7 @@
 /*   By: tnguyen- <tnguyen-@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/10 19:39:13 by tnguyen-          #+#    #+#             */
-/*   Updated: 2024/04/11 02:13:00 by tnguyen-         ###   ########.fr       */
+/*   Updated: 2024/04/11 03:12:09 by tnguyen-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,13 +58,12 @@ void	show_mem()
 		it = page;
 		while(it)
 		{
-			printf("page: %p\n", it);
-			printf("next: %p\n", it->next);
-			printf("addr: %p\n", it->addr);
-			printf("type: %d\n", it->type);
-			printf("size: %zu\n", it->size);
-			printf("used: %zu\n", it->used);
-			printf("blocks: %p\n", it->blocks);
+			if (it->type == TINY)
+				printf("TINY: %p\n", it);
+			else if (it->type == SMALL)
+				printf("SMALL: %p\n", it);
+			else
+				printf("LARGE: %p\n", it);
 			it = it->next;
 		}
 	}
@@ -74,34 +73,39 @@ void	show_mem()
 
 void	free_page(void *addr)
 {
-	t_page	*it;
-	t_page	*tmp;
+	t_page	*curr;
+	t_page	*prev;
 
-	it = page;
-	tmp = page;
+	curr = page;
+	prev = page;
 
-	while(it->next)
+	while(curr)
 	{
-		if (addr > it->addr && addr < it->next->addr)
+		//printf("curr: %p\n", curr);
+		if (addr >= (void*)curr && curr->next == NULL)
 		{
-			printf("free\n");
-			tmp->next = it->next;
-			munmap(it, it->size);
-			return ;
+			if (prev == curr)
+				page = NULL;
+			else
+				prev->next = NULL;
+			if (munmap(curr, curr->size) == 0)
+				curr = NULL;
+				
+			break ;
 		}
-		else 
-			tmp = it;
-		it = it->next;
+		else if (addr >= (void*)curr && addr < (void*)curr->next)
+		{
+			if (prev == curr)
+				page = curr->next;
+			else
+				prev->next = curr->next;
+			if (munmap(curr, curr->size) == 0)
+				curr = NULL;
+			break ;
+		}
+		prev = curr;
+		curr = curr->next;
 	}
-	printf("free\n");
-	tmp->next = NULL;
-	if (munmap(it, it->size) == 0)
-	{	
-		printf("Memory well free\n");
-		page = NULL;
-	}
-	else
-		printf("Error\n");
 	
 }
 

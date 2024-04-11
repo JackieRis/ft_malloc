@@ -6,7 +6,7 @@
 /*   By: tnguyen- <tnguyen-@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/27 14:59:19 by tnguyen-          #+#    #+#             */
-/*   Updated: 2024/04/11 02:11:00 by tnguyen-         ###   ########.fr       */
+/*   Updated: 2024/04/11 03:12:19 by tnguyen-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,12 +62,13 @@ int main(int argc, char **argv)
 	///*///////////////////////////////////////////////*/
 
 	t_page	*page = create_page(TINY);
-	//t_page	*baguette = create_page(SMALL);
-	//t_page	*poulet = create_page(SMALL);
+	t_page	*baguette = create_page(SMALL);
+	t_page	*poulet = create_page(SMALL);
 	//show_mem();
-	free_page(page);
 	show_mem();
-	//(void)baguette;
-	//(void)poulet;
+	free_page(page);
+	//(void)page;
+	free_page(baguette);
+	free_page(poulet);
 	return 0;
 }
