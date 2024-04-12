@@ -6,7 +6,7 @@
 /*   By: tnguyen- <tnguyen-@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/04 10:09:34 by tnguyen-          #+#    #+#             */
-/*   Updated: 2024/04/11 03:42:23 by tnguyen-         ###   ########.fr       */
+/*   Updated: 2024/04/12 05:09:23 by tnguyen-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,16 +19,21 @@
 #define SMALL 1024
 #define	GET_MEM(size)mmap(NULL, size, PROT_READ| PROT_WRITE, MAP_ANONYMOUS | MAP_PRIVATE, -1, 0)
 
+typedef struct	s_block
+{
+	struct s_block	*next;
+	size_t		size;
+}				t_block;
+
 typedef struct	s_page
 {
 	struct s_page	*next;
-	void		*addr;
 	int			type;
 	size_t		size;
 	size_t		used;
-	//pointer to stock blocks_used_size
-	size_t 		*blocks;
+	t_block		*blocks;
 }				t_page;
+
 
 void	move_mem(void** ref);
 t_page	*create_page(int type);

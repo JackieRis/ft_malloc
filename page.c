@@ -6,7 +6,7 @@
 /*   By: tnguyen- <tnguyen-@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/10 19:39:13 by tnguyen-          #+#    #+#             */
-/*   Updated: 2024/04/11 03:41:57 by tnguyen-         ###   ########.fr       */
+/*   Updated: 2024/04/12 05:17:39 by tnguyen-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ t_page	*create_page(int type)
 	size_t	sz;
 
 	sz = getpagesize();
-	alloc_size = 100 * type + sizeof(t_page) + 16 + (100 * sizeof(size_t));
+	alloc_size = 100 * type + sizeof(t_page) + 16 + (100 * sizeof(t_block));
 	alloc_size = ((int)(alloc_size / sz) + 1) * sz;
 	//printf("%lu\n", alloc_size);
 	new = GET_MEM(alloc_size);
@@ -41,7 +41,7 @@ t_page	*create_page(int type)
 	new->size = alloc_size;
 	new->type = type;
 	new->used = 0;
-	new->addr = (void *)(new->blocks + (100 * sizeof(size_t)));
+	new->blocks = NULL;
 	it = page;
 	if (!it)
 		page = new;
@@ -71,6 +71,7 @@ void	*find_page(int type)
 void	show_alloc_mem()
 {
 	t_page	*it;
+	t_block	*blocks;
 
 	if (page)
 	{
@@ -79,23 +80,31 @@ void	show_alloc_mem()
 		{
 			if (it->type == TINY)
 			{
-				printf("TINY : %p\n", it->addr);
-				for (int i = 0; i < (int)it->used; i++)
-					printf("%p - %p %lu\n", it->addr + (i * TINY), it->addr + (i * TINY) + it->blocks[i], it->blocks[i]);
+				printf("TINY : %p\n", it);
+				blocks = it->blocks;
+				while (blocks)
+				{
+					printf("%p - %p : %lu\n", blocks, blocks + blocks->size, blocks->size);
+					blocks = blocks->next;
+				}
 			}
 			else if (it->type == SMALL)
 			{
-				printf("SMALL : %p\n", it->addr);
-				for (int i = 0; i < (int)it->used; i++)
-					printf("%p - %p %lu\n", it->addr + (i * SMALL), it->addr + (i * SMALL) + it->blocks[i], it->blocks[i]);
+				printf("SMALL : %p\n", it);
+				blocks = it->blocks;
+				while (blocks)
+				{
+					printf("%p - %p : %lu\n", blocks, blocks + blocks->size, blocks->size);
+					blocks = blocks->next;
+				}
 			}
 			else
-				printf("LARGE : %p\n", it->addr);
+				printf("LARGE : %p\n", it);
 			it = it->next;
 		}
 	}
 	else
-		printf("Memory well free\n");
+		printf("No memory allocated\n");
 }
 
 void	free_page(void *addr)

@@ -6,7 +6,7 @@
 /*   By: tnguyen- <tnguyen-@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/27 14:59:19 by tnguyen-          #+#    #+#             */
-/*   Updated: 2024/04/11 03:55:41 by tnguyen-         ###   ########.fr       */
+/*   Updated: 2024/04/12 05:19:02 by tnguyen-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,13 +68,18 @@ int main(int argc, char **argv)
 	///*///////////////////////////////////////////////*/
 
 	char *addr = ft_malloc(50 * sizeof(char));
-	char *addr2 = ft_malloc(42 * sizeof(char));
-	int *addr3 = ft_malloc(100 * sizeof(int));
-	show_alloc_mem();
+
 	printf("\n");
-	free(addr2);
-	free(addr);
 	show_alloc_mem();
-	free(addr3);
+	free(addr);
+	//char *addr2 = ft_malloc(42 * sizeof(char));
+	//int *addr3 = ft_malloc(100 * sizeof(int));
+	//show_alloc_mem();
+	//printf("\n");
+	//free(addr2);
+	//free(addr);
+	//show_alloc_mem();
+	//free(addr3);
+	//show_alloc_mem();
 	return 0;
 }
