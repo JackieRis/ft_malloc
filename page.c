@@ -6,7 +6,7 @@
 /*   By: tnguyen- <tnguyen-@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/10 19:39:13 by tnguyen-          #+#    #+#             */
-/*   Updated: 2024/04/12 05:17:39 by tnguyen-         ###   ########.fr       */
+/*   Updated: 2024/04/12 21:00:07 by tnguyen-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,12 +36,41 @@ t_page	*create_page(int type)
 	new = GET_MEM(alloc_size);
 	if (new == MAP_FAILED)
 		return NULL;
-	new->blocks = (void *)(new + sizeof(t_page));
 	new->next = NULL;
 	new->size = alloc_size;
 	new->type = type;
 	new->used = 0;
 	new->blocks = NULL;
+	it = page;
+	if (!it)
+		page = new;
+	else
+	{
+		while(it->next)
+			it = it->next;
+		it->next = new;
+	}
+	return (new);
+}
+
+t_page	*create_large_page(size_t size)
+{
+	t_page	*it;
+	t_page	*new;
+	size_t	sz;
+	size_t	alloc_size;
+
+	sz = getpagesize();
+	alloc_size = size + sizeof(t_page) + 16 + sizeof(t_block);
+	alloc_size = ((int)(alloc_size / sz) + 1) * sz;
+	new = GET_MEM(alloc_size);
+	if (new == MAP_FAILED)
+		return NULL;
+	new->next = NULL;
+	new->size = alloc_size;
+	new->type = 0;
+	new->used = 0;
+	new->blocks = (void*)new + sizeof(new);
 	it = page;
 	if (!it)
 		page = new;
@@ -84,7 +113,8 @@ void	show_alloc_mem()
 				blocks = it->blocks;
 				while (blocks)
 				{
-					printf("%p - %p : %lu\n", blocks, blocks + blocks->size, blocks->size);
+					if (blocks->used == 1)
+						printf("%p - %p : %lu\n", blocks, blocks + blocks->size, blocks->size);
 					blocks = blocks->next;
 				}
 			}

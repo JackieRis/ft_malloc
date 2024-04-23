@@ -6,7 +6,7 @@
 /*   By: tnguyen- <tnguyen-@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/27 14:59:19 by tnguyen-          #+#    #+#             */
-/*   Updated: 2024/04/12 05:19:02 by tnguyen-         ###   ########.fr       */
+/*   Updated: 2024/04/12 21:01:41 by tnguyen-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,19 +67,46 @@ int main(int argc, char **argv)
 
 	///*///////////////////////////////////////////////*/
 
-	char *addr = ft_malloc(50 * sizeof(char));
 
-	printf("\n");
-	show_alloc_mem();
-	free(addr);
-	//char *addr2 = ft_malloc(42 * sizeof(char));
-	//int *addr3 = ft_malloc(100 * sizeof(int));
-	//show_alloc_mem();
 	//printf("\n");
-	//free(addr2);
+	//show_alloc_mem();
 	//free(addr);
+	char *addr = ft_malloc(50 * sizeof(char));
+	char *addr2 = ft_malloc(42 * sizeof(char));
+	int *addr3 = ft_malloc(100 * sizeof(int));
 	//show_alloc_mem();
-	//free(addr3);
-	//show_alloc_mem();
+	show_alloc_mem();
+	printf("\n");
+	free(addr2);
+	free(addr);
+	show_alloc_mem();
+	free(addr3);
+
+	///*///////////////////////////////////////////////*/
+
+	char **array = ft_malloc(100 * sizeof(char *));
+	if (array == NULL) {
+		// Handle allocation failure
+		return 1;
+	}
+
+	for (int i = 0; i < 100; i++) {
+		array[i] = ft_malloc(120 * sizeof(char));
+		if (array[i] == NULL) {
+			// Handle allocation failure
+			break;
+		}
+		// Use the allocated memory
+		// ...
+	}
+
+
+
+	// Free the allocated memory
+	//for (int i = 0; i < 100; i++) {
+	//	free(array[i]);
+	//}
+	//free(array);
+
 	return 0;
 }

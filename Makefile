@@ -6,7 +6,7 @@
 #    By: tnguyen- <tnguyen-@student.42lyon.fr>      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/10/19 06:44:27 by tnguyen-          #+#    #+#              #
-#    Updated: 2024/04/11 02:22:48 by tnguyen-         ###   ########.fr        #
+#    Updated: 2024/04/12 20:35:07 by tnguyen-         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -20,7 +20,7 @@ OBJ	= ${SRCS:.c=.o}
 
 CC = gcc
 
-FLAGS = -Wall -Werror -Wextra -fno-builtin -I.
+FLAGS = -Wall -Werror -Wextra -fno-builtin -fsanitize=address -I.
 
 all: ${NAME}
 
