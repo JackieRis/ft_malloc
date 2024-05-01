@@ -6,7 +6,7 @@
 /*   By: tnguyen- <tnguyen-@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/04 10:09:34 by tnguyen-          #+#    #+#             */
-/*   Updated: 2024/04/12 21:00:23 by tnguyen-         ###   ########.fr       */
+/*   Updated: 2024/05/01 18:10:30 by tnguyen-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,13 @@ typedef struct	s_block
 	size_t		size;
 }				t_block;
 
+/*
+	My allocation's page storage
+	TYPE: type of the page, SMALL, TINY OR LARGE
+	SIZE: only usefull for LARGE allocation, basically size allocated
+	USED: number of blocks used in this page
+	BLOCKS: block's list
+*/
 typedef struct	s_page
 {
 	struct s_page	*next;
