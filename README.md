@@ -2,7 +2,7 @@
 
 ## WORK IN PROGRESS
 
-We have to use mmap() instead of brk(), not like the real nalloc does.
+We have to use mmap() instead of brk(), not like the real malloc does.
 
 There are three types of allocations:
 - TINY < 128 Bytes
@@ -25,7 +25,7 @@ typedef struct	s_page
 	size_t		*blocks;
 }				t_page;
 ```
-Finally a basic structure, readable, and easier to use, but Something was missing, I needed an easier way to get more informations about my blocks.
+Finally a basic structure, readable, and easier to use, but something was missing, I needed an easier way to get more informations about my blocks.
 
 The final structure was then created:
 ```c
@@ -55,7 +55,7 @@ typedef struct	s_page
 In the future, I may add struct s_page *prev for free() or re-allocate.
 
 
-I threw too much time about a mistake, about how should I make my malloc segfault.
+I wasted too much time about a mistake, about how should I make my malloc segfault.
 I explain, for example, you ask
 ```c
 char *test = ft_malloc(42)
@@ -64,7 +64,7 @@ if the user tries
 ```c
 test[45];
 ```
-the real mallock makes you segfault, but here, I can't segfault, it's impossible because you are in a TINY case, so i've got an entire page allocated in wich you can fit 100 blocks of 128 Bytes.
+the real malloc makes you segfault, but here, I can't segfault, it's impossible because you are in a TINY case, so i've got an entire page allocated in wich you can fit 100 blocks of 128 Bytes.
 
 And the second problem about it is....
 ```c
